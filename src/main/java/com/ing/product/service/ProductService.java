@@ -32,9 +32,9 @@ public class ProductService {
 
     private Product toProduct(ProductEntity productEntity) {
         return Product.builder()
-                .productId(productEntity.getId())
-                .productName(productEntity.getName())
-                .productGroup(ProductGroup.valueOf(productEntity.getType()))
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .group(ProductGroup.valueOf(productEntity.getType()))
                 .build();
     }
 }

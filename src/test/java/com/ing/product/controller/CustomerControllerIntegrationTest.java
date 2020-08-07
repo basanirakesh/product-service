@@ -54,6 +54,6 @@ class CustomerControllerIntegrationTest {
     }
 
     private String getExpectedResult() {
-        return "[{\"productId\":1,\"productName\":\"Orange Savings Account\",\"productGroup\":\"Savings\"},{\"productId\":2,\"productName\":\"Savings Deposit\",\"productGroup\":\"Savings\"},{\"productId\":3,\"productName\":\"Bonus Interest Account\",\"productGroup\":\"Savings\"},{\"productId\":4,\"productName\":\"Interest only\",\"productGroup\":\"Mortgage\"}]";
+        return "[{\"id\":1,\"name\":\"Orange Savings Account\",\"group\":\"Savings\"},{\"id\":2,\"name\":\"Savings Deposit\",\"group\":\"Savings\"},{\"id\":3,\"name\":\"Bonus Interest Account\",\"group\":\"Savings\"},{\"id\":4,\"name\":\"Interest only\",\"group\":\"Mortgage\"}]";
     }
 }

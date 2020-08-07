@@ -7,9 +7,9 @@ import lombok.Builder;
 @Data
 public class Product {
 
-    private Long productId;
-    private String productName;
-    private ProductGroup productGroup;
+    private Long id;
+    private String name;
+    private ProductGroup group;
 
 
 }
