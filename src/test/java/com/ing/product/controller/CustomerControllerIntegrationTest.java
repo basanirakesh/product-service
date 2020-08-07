@@ -37,7 +37,7 @@ class CustomerControllerIntegrationTest {
 
     @Test
     @DisplayName("Get all Customer product.")
-    public void getAllCustomerProducts() throws Exception {
+    public void testGetAllCustomerProducts() throws Exception {
 
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
 
@@ -49,11 +49,34 @@ class CustomerControllerIntegrationTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        assertEquals(getExpectedResult(), jsonResponse);
+        assertEquals(getExpectedCustomerProductsResult(), jsonResponse);
 
     }
 
-    private String getExpectedResult() {
+    private String getExpectedCustomerProductsResult() {
         return "[{\"id\":1,\"name\":\"Orange Savings Account\",\"group\":\"Savings\"},{\"id\":2,\"name\":\"Savings Deposit\",\"group\":\"Savings\"},{\"id\":3,\"name\":\"Bonus Interest Account\",\"group\":\"Savings\"},{\"id\":4,\"name\":\"Interest only\",\"group\":\"Mortgage\"}]";
+    }
+
+
+    @Test
+    @DisplayName("Get Specific product of Customer.")
+    public void testGetCustomerProduct() throws Exception {
+
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+
+        String jsonResponse = mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:"+port+"/v1/customers/1/products/4")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andReturn()
+                .getResponse().getContentAsString();
+
+        assertEquals(getExpectedProductResult(), jsonResponse);
+
+    }
+
+    private String getExpectedProductResult() {
+        return "[{\"id\":4,\"name\":\"Interest only\",\"accountNumber\":\"4463453\",\"interestRate\":5,\"amount\":3000,\"maturityAmount\":500}]";
     }
 }

@@ -5,6 +5,7 @@ import com.ing.product.model.CustomerProductMapping;
 import com.ing.product.repository.CustomerProductRepository;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +15,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@Transactional
-@SpringBootTest(classes = {ProductServiceApplication.class})
+@SpringBootTest(classes = ProductServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CustomerProductRepositoryTest {
 
     @Autowired
@@ -23,7 +24,7 @@ public class CustomerProductRepositoryTest {
 
     @Test
     public void testFindCustomerProductMappingsById() {
-        List<CustomerProductMapping> customerProductRepositoryList = customerProductRepository.findCustomerProductMappingsById(1l, 1l);
+        List<CustomerProductMapping> customerProductRepositoryList = customerProductRepository.findCustomerProductMappingsById(1L, 1L);
         Assert.assertEquals(customerProductRepositoryList.size(), 1);
     }
 }
