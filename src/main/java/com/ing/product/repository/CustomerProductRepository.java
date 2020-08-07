@@ -9,4 +9,6 @@ import java.util.List;
 public interface CustomerProductRepository {
 
     List<Long> getProductIds(Long customerId);
+
+    List<CustomerProductMapping> findCustomerProductMappingsById(Long customerId, Long productId);
 }

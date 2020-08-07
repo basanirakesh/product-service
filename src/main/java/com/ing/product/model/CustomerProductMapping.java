@@ -17,4 +17,8 @@ public class CustomerProductMapping {
     private CustomerProductId customerProductId;
     @Column(name =  "AMOUNT")
     private BigDecimal amount;
+    @Column(name =  "MATURITY_AMOUNT")
+    private BigDecimal maturityAmount;
+    @Column(name =  "ACCOUNT_NUMBER")
+    private String accountNumber;
 }

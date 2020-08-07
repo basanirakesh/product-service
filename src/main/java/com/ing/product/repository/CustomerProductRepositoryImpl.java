@@ -22,4 +22,15 @@ public class CustomerProductRepositoryImpl implements  CustomerProductRepository
         return entityManager.createQuery("SELECT customerProductId.productId from CustomerProductMapping where customerProductId.customerId=:customerId"
                 , Long.class).setParameter("customerId", customerId).getResultList();
     }
+
+    @Override
+    public List<CustomerProductMapping> findCustomerProductMappingsById(Long customerId, Long productId) {
+        return entityManager.createQuery("from CustomerProductMapping " +
+                        "where customerProductId.customerId=:customerId " +
+                        "and customerProductId.productId=:productId"
+                , CustomerProductMapping.class)
+                .setParameter("customerId", customerId)
+                .setParameter("productId", productId)
+                .getResultList();
+    }
 }
