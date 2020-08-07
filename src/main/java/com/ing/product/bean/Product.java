@@ -12,5 +12,4 @@ public class Product {
     private ProductGroup productGroup;
 
 
-
 }

@@ -23,7 +23,7 @@ public class CustomerController {
     private ProductService productService;
 
     @ApiOperation(value = "Get Customer products")
-    @PostMapping(value = "/{customerId}/products", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/{customerId}/products", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Product>> getProducts(@NonNull @PathVariable Long customerId) {
         return Optional.of(productService.getCustomerProducts(customerId))
                 .map(products -> ResponseEntity.status(HttpStatus.CREATED).body(products))
