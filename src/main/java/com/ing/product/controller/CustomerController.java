@@ -29,17 +29,29 @@ public class CustomerController extends CustomizedResponseExceptionHandler {
     @ApiOperation(value = "Get All Customer's products")
     @GetMapping(value = "/{customerId}/products", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Product>> getAllProducts(@NonNull @PathVariable Long customerId) {
-        return Optional.of(productService.getCustomerProducts(customerId))
-                .map(products -> ResponseEntity.status(HttpStatus.OK).body(products))
-                .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
+
+        List<Product> products = productService.getCustomerProducts(customerId);
+        if(products == null || products.size() ==0) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return Optional.of(productService.getCustomerProducts(customerId))
+                    .map(productList -> ResponseEntity.status(HttpStatus.OK).body(productList))
+                    .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
+        }
     }
 
     @ApiOperation(value = "Get Customer products")
     @GetMapping(value = "/{customerId}/products/{productId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<CustomerProduct>> getCustomerProducts(@NonNull @PathVariable Long customerId,
                                                              @NonNull @PathVariable Long productId) {
-        return Optional.of(productService.getCustomerProducts(customerId, productId))
-                .map(products -> ResponseEntity.status(HttpStatus.OK).body(products))
-                .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
+        List<CustomerProduct> customerProducts = productService.getCustomerProducts(customerId, productId);
+        if(customerProducts == null || customerProducts.size() ==0) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return Optional.of(customerProducts)
+                    .map(customerProductList -> ResponseEntity.status(HttpStatus.OK).body(customerProductList))
+                    .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
+        }
+
     }
 }

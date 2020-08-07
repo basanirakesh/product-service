@@ -53,6 +53,20 @@ class CustomerControllerIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("Expect Bad Request when customernot exits.")
+    public void testGetAllCustomerProducts_whenCustomerNotExists() throws Exception {
+
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:"+port+"/v1/customers/100/products")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(400));
+
+    }
+
     private String getExpectedCustomerProductsResult() {
         return "[{\"id\":1,\"name\":\"Orange Savings Account\",\"group\":\"Savings\"},{\"id\":2,\"name\":\"Savings Deposit\",\"group\":\"Savings\"},{\"id\":3,\"name\":\"Bonus Interest Account\",\"group\":\"Savings\"},{\"id\":4,\"name\":\"Interest only\",\"group\":\"Mortgage\"}]";
     }
@@ -78,5 +92,18 @@ class CustomerControllerIntegrationTest {
 
     private String getExpectedProductResult() {
         return "[{\"id\":4,\"name\":\"Interest only\",\"accountNumber\":\"4463453\",\"interestRate\":5,\"amount\":3000,\"maturityAmount\":500}]";
+    }
+
+    @Test
+    @DisplayName("Expect Bad Request when customer or product not exits.")
+    public void testGetCustomerProduct_whenCustomerOrProductNotExists() throws Exception {
+
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:"+port+"/v1/customers/1/products/0")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(400));
     }
 }
