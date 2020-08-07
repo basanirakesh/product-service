@@ -10,5 +10,17 @@ create table PRODUCT
 (
  ID NUMBER(10) not null,
  TYPE VARCHAR2(30) not null,
- NAME VARCHAR2(50) not null
+ NAME VARCHAR2(50) not null,
+ INTEREST_RATE NUMBER(10) null,
+ PRIMARY KEY(ID)
+);
+
+create table CUSTOMER_PRODUCT
+(
+    CUSTOMER_ID NUMBER(10) not null,
+    PRODUCT_ID NUMBER(10) not null,
+    AMOUNT NUMBER(10) null,
+    MATURITY_AMOUNT NUMBER(10) null,
+    ACCOUNT_NUMBER VARCHAR2(50) null,
+    PRIMARY KEY (CUSTOMER_ID, PRODUCT_ID)
 );
