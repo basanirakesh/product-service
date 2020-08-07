@@ -2,6 +2,7 @@ package com.ing.product.controller;
 
 import com.ing.product.bean.CustomerProduct;
 import com.ing.product.bean.Product;
+import com.ing.product.exceptionhandling.CustomizedResponseExceptionHandler;
 import com.ing.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +22,7 @@ import java.util.Optional;
 @RequestMapping(value = "v1/customers")
 @AllArgsConstructor
 @Validated
-public class CustomerController {
+public class CustomerController extends CustomizedResponseExceptionHandler {
 
     private ProductService productService;
 
