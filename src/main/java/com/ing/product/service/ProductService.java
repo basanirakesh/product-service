@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -51,6 +52,17 @@ public class ProductService {
         List<Long> productIds = customerProductRepository.getProductIds(customerId);
         List<ProductEntity> productEntities = productRepository.findAllById(productIds);
 
-        return products;
+        return productEntities.stream()
+                .map(this::toProduct)
+                .collect(Collectors.toList());
+        //return products;
+    }
+
+    private Product toProduct(ProductEntity productEntity) {
+        return Product.builder()
+                .productId(productEntity.getId())
+                .productName(productEntity.getName())
+                .productGroup(ProductGroup.valueOf(productEntity.getType()))
+                .build();
     }
 }

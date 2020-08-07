@@ -26,7 +26,7 @@ public class CustomerController {
     @GetMapping(value = "/{customerId}/products", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Product>> getProducts(@NonNull @PathVariable Long customerId) {
         return Optional.of(productService.getCustomerProducts(customerId))
-                .map(products -> ResponseEntity.status(HttpStatus.CREATED).body(products))
+                .map(products -> ResponseEntity.status(HttpStatus.OK).body(products))
                 .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
     }
 
