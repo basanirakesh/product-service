@@ -2,10 +2,7 @@ package com.ing.product.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ing.product.ProductServiceApplication;
-import com.ing.product.bean.Product;
-import jdk.internal.org.objectweb.asm.TypeReference;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,9 +17,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @SpringBootTest(classes = ProductServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -52,7 +49,7 @@ class CustomerControllerIntegrationTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        Assert.assertEquals(getExpectedResult(), jsonResponse);
+        assertEquals(getExpectedResult(), jsonResponse);
 
     }
 
